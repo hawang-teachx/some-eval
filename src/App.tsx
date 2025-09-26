@@ -1,241 +1,271 @@
-import { Settings, Eye, PieChart, Heart, Briefcase, ChevronDown, Home } from 'lucide-react';
+import { CreditCard, LayoutGrid, Wallet, ReceiptText, Command, BarChart3, Trophy, HelpCircle, Plus, ShieldCheck, Lock, Eye } from 'lucide-react'
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col max-w-md mx-auto">
-      {/* Header */}
-      <header className="bg-pink-500 text-white px-6 py-4 flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <Settings className="w-6 h-6" />
-          <div className="flex items-center gap-1 bg-white bg-opacity-20 rounded-full px-3 py-1">
-            <h1 className="text-lg font-medium">Overview: My Household</h1>
-            <ChevronDown className="w-4 h-4" />
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[240px_1fr] bg-white text-black">
+      {/* Sidebar */}
+      <aside className="flex flex-col border-b border-black lg:border-b-0 lg:border-r">
+        <div className="p-4 flex items-center gap-2">
+          <CreditCard size={28} />
+          <div>
+            <div className="font-semibold">RedBank</div>
+            <div className="text-xs text-black/60">Credit Management</div>
           </div>
         </div>
-        <div className="w-6"></div> {/* Spacer for centering */}
-      </header>
 
-      {/* Tab Navigation */}
-      <div className="bg-pink-500 text-white">
-        <div className="flex px-6">
-          <button className="flex-1 py-4 text-center font-medium border-b-2 border-white">
-            OVERVIEW
+        <div className="px-2 pb-4 space-y-1">
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><LayoutGrid size={16} /> Dashboard</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-black/20"><CreditCard size={16} /> Credit List</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><Wallet size={16} /> Loans</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><ReceiptText size={16} /> Transactions</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><Command size={16} /> Command Center</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><BarChart3 size={16} /> Reports</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><Trophy size={16} /> Rewards</div>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-md"><HelpCircle size={16} /> Help</div>
+        </div>
+
+        <div className="mt-auto p-4">
+          <div className="border border-black rounded-lg bg-white">
+            <div className="p-4">
+              <div className="font-semibold text-black/60 mb-2">Account Summary</div>
+              <div className="grid grid-cols-[1fr_auto] gap-y-2 text-sm">
+                <div className="text-black/60 text-xs">Total Credit</div>
+                <div className="text-xs">$15,000</div>
+                <div className="text-black/60 text-xs">Available</div>
+                <div className="text-xs">$12,341</div>
+                <div className="text-black/60 text-xs">Used</div>
+                <div className="text-xs">$2,659</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      {/* Main */}
+      <main>
+        <div className="flex items-center justify-between p-4 border-b border-black">
+          <div>
+            <div className="font-bold">Credit Card Management</div>
+            <div className="text-xs text-gray-500 mt-1">Manage all your credit cards in one place</div>
+          </div>
+          <button className="inline-flex items-center gap-2 border border-black rounded-md px-3 py-2 bg-white"> 
+            <Plus size={16} /> Apply for New Card
           </button>
-          <button className="flex-1 py-4 text-center font-medium opacity-70">
-            SPENDING
-          </button>
-          <button className="flex-1 py-4 text-center font-medium opacity-70">
-            LIST
-          </button>
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <main className="flex-1 px-6 py-6 space-y-6">
-        {/* Summary Section */}
-        <div className="bg-white rounded-3xl p-6 shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-xl font-semibold text-gray-500">September 2025</h2>
-            <div className="flex items-center gap-2">
-              <span className="text-sm text-gray-500">11 TRANSACTIONS</span>
-              <div className="w-4 h-4 bg-pink-400 rounded-sm"></div>
-            </div>
-          </div>
-
-          <div className="flex gap-4">
-            {/* Income Card */}
-            <div className="flex-1 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <div className="w-12 h-12 bg-green-400 rounded-full mb-3 flex items-center justify-center">
-                <div className="w-8 h-6 bg-green-300 rounded-full"></div>
-              </div>
-              <div className="text-2xl font-bold text-gray-900">$3,500</div>
-              <div className="text-sm text-gray-500">INCOME</div>
-            </div>
-
-            {/* Expenses Card */}
-            <div className="flex-1 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <div className="w-12 h-12 bg-pink-400 rounded-full mb-3 flex items-center justify-center">
-                <div className="w-8 h-6 bg-pink-300 rounded-full"></div>
-              </div>
-              <div className="text-2xl font-bold text-gray-900">$2,377</div>
-              <div className="text-sm text-gray-500">EXPENSES</div>
-            </div>
-
-            {/* Left Card */}
-            <div className="flex-1 bg-white rounded-2xl p-4 border border-gray-100 shadow-sm">
-              <div className="w-12 h-12 bg-purple-400 rounded-full mb-3 flex items-center justify-center">
-                <div className="w-8 h-6 bg-purple-300 rounded-full"></div>
-              </div>
-              <div className="text-2xl font-bold text-gray-900">$1,123</div>
-              <div className="text-sm text-gray-500">LEFT</div>
-            </div>
-          </div>
         </div>
 
-        {/* Expenses Section */}
-        <div className="bg-white rounded-3xl p-6 shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-semibold text-gray-900">EXPENSES</h3>
-            <div className="w-6"></div>
-          </div>
-
-          {/* Circular Chart */}
-          <div className="relative flex justify-center items-center mb-8">
-            <svg width="200" height="200" className="transform -rotate-90">
-              {/* Background circle */}
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                fill="none"
-                stroke="#FEF3C7"
-                strokeWidth="16"
-              />
-              {/* Housing segment (orange) - 65% */}
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                fill="none"
-                stroke="#FB923C"
-                strokeWidth="16"
-                strokeDasharray={`${0.65 * 2 * Math.PI * 80} ${2 * Math.PI * 80}`}
-                strokeLinecap="round"
-              />
-              {/* Food & drinks segment (blue) - 30% */}
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                fill="none"
-                stroke="#60A5FA"
-                strokeWidth="16"
-                strokeDasharray={`${0.30 * 2 * Math.PI * 80} ${2 * Math.PI * 80}`}
-                strokeLinecap="round"
-                strokeDashoffset={`${-0.65 * 2 * Math.PI * 80}`}
-              />
-              {/* Entertainment segment (pink) - 3% */}
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                fill="none"
-                stroke="#F472B6"
-                strokeWidth="16"
-                strokeDasharray={`${0.03 * 2 * Math.PI * 80} ${2 * Math.PI * 80}`}
-                strokeLinecap="round"
-                strokeDashoffset={`${-(0.65 + 0.30) * 2 * Math.PI * 80}`}
-              />
-              {/* Lifestyle segment (red) - 2% */}
-              <circle
-                cx="100"
-                cy="100"
-                r="80"
-                fill="none"
-                stroke="#F87171"
-                strokeWidth="16"
-                strokeDasharray={`${0.02 * 2 * Math.PI * 80} ${2 * Math.PI * 80}`}
-                strokeLinecap="round"
-                strokeDashoffset={`${-(0.65 + 0.30 + 0.03) * 2 * Math.PI * 80}`}
-              />
-            </svg>
-
-            {/* Center content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center">
-              <div className="w-16 h-16 bg-orange-400 rounded-full flex items-center justify-center mb-2">
-                <Home className="w-8 h-8 text-white" />
+        <div className="p-4">
+          <div className="grid gap-4 lg:grid-cols-3">
+            {/* Card 1 */}
+            <div className="border border-black rounded-lg bg-white">
+              <div className="p-4 border-b border-black flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <CreditCard size={18} />
+                  <div className="font-semibold">Platinum Rewards</div>
+                </div>
+                <div className="flex gap-2">
+                  <span className="inline-flex items-center gap-1 border border-black rounded-full px-2 py-0.5 text-xs">Primary</span>
+                  <span className="inline-flex items-center gap-1 border border-black rounded-full px-2 py-0.5 text-xs"><ShieldCheck size={14} /> Active</span>
+                </div>
               </div>
-              <div className="text-3xl font-bold text-gray-900">$1,532</div>
-              <div className="text-sm text-gray-500">HOUSING</div>
-            </div>
-          </div>
+              <div className="p-4">
+                <div className="flex justify-between">
+                  <div className="font-semibold">**** **** **** 9012</div>
+                  <Eye size={16} />
+                </div>
 
-          {/* Add button */}
-          <div className="flex justify-end">
-            <button className="w-12 h-12 bg-pink-400 rounded-full flex items-center justify-center text-white text-xl font-bold">
-              +
-            </button>
-          </div>
-        </div>
+                <div className="flex gap-4 mt-3">
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Expires</div>
+                    <div className="text-xs">12/27</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Holder</div>
+                    <div className="text-xs">John Doe</div>
+                  </div>
+                </div>
 
-        {/* Categories Section */}
-        <div className="bg-white rounded-3xl p-6 shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-semibold text-gray-900">HEAD CATEGORIES</h3>
-            <h3 className="text-lg font-semibold text-gray-900">CATEGORIES</h3>
-          </div>
+                <div className="mt-3">
+                  <div className="text-xs text-black/60 flex justify-between">
+                    <span>Credit Utilization</span>
+                    <span>15.7%</span>
+                  </div>
+                  <div className="h-2 border border-black rounded-full overflow-hidden mt-1">
+                    <span className="block h-full bg-black w-[15.7%]" />
+                  </div>
+                </div>
 
-          {/* Category Items */}
-          <div className="space-y-4">
-            <div className="flex items-center justify-between py-3">
-              <div className="flex items-center gap-3">
-                <div className="w-4 h-4 bg-orange-400 rounded-full"></div>
-                <span className="font-medium text-gray-900">Housing</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="text-lg font-bold text-gray-900">$1,532</span>
-                <div className="w-6 h-6 text-gray-400">›</div>
+                <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                  <div>
+                    <div className="text-xs text-black/60">Balance</div>
+                    <div>$1,259.43</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-black/60">Available</div>
+                    <div>$6,740.57</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                  <div>
+                    <div className="text-xs text-black/60">Min Payment</div>
+                    <div>$45.00</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-black/60">Due Date</div>
+                    <div>9/14/2025</div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 mt-4">
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">Make Payment</button>
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">View Statements</button>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between py-3">
-              <div className="flex items-center gap-3">
-                <div className="w-4 h-4 bg-blue-400 rounded-full"></div>
-                <span className="font-medium text-gray-900">Food & drinks</span>
+            {/* Card 2 */}
+            <div className="border border-black rounded-lg bg-white">
+              <div className="p-4 border-b border-black flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <CreditCard size={18} />
+                  <div className="font-semibold">Travel Elite</div>
+                </div>
+                <div className="inline-flex items-center gap-1 border border-black rounded-full px-2 py-0.5 text-xs"><ShieldCheck size={14} /> Active</div>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="text-lg font-bold text-gray-900">$750</span>
-                <div className="w-6 h-6 text-gray-400">›</div>
+              <div className="p-4">
+                <div className="flex justify-between">
+                  <div className="font-semibold">**** **** **** 9012</div>
+                  <Eye size={16} />
+                </div>
+
+                <div className="flex gap-4 mt-3">
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Expires</div>
+                    <div className="text-xs">09/26</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Holder</div>
+                    <div className="text-xs">John Doe</div>
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <div className="text-xs text-black/60 flex justify-between">
+                    <span>Credit Utilization</span>
+                    <span>20.0%</span>
+                  </div>
+                  <div className="h-2 border border-black rounded-full overflow-hidden mt-1">
+                    <span className="block h-full bg-black w-[20%]" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                  <div>
+                    <div className="text-xs text-black/60">Balance</div>
+                    <div>$1,399.87</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-black/60">Available</div>
+                    <div>$5,600.13</div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                  <div>
+                    <div className="text-xs text-black/60">Min Payment</div>
+                    <div>$50.00</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-black/60">Due Date</div>
+                    <div>9/19/2025</div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 mt-4">
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">Make Payment</button>
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">View Statements</button>
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center justify-between py-3">
-              <div className="flex items-center gap-3">
-                <div className="w-4 h-4 bg-pink-400 rounded-full"></div>
-                <span className="font-medium text-gray-900">Entertainment</span>
+            {/* Card 3 */}
+            <div className="border border-black rounded-lg bg-white">
+              <div className="p-4 border-b border-black flex items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <CreditCard size={18} />
+                  <div className="font-semibold">Cashback Plus</div>
+                </div>
+                <div className="inline-flex items-center gap-1 border border-black rounded-full px-2 py-0.5 text-xs"><Lock size={14} /> Locked</div>
               </div>
-              <div className="flex items-center gap-4">
-                <span className="text-lg font-bold text-gray-900">$66</span>
-                <div className="w-6 h-6 text-gray-400">›</div>
+              <div className="p-4">
+                <div className="flex justify-between">
+                  <div className="font-semibold">**** **** **** 9012</div>
+                  <Eye size={16} />
+                </div>
+
+                <div className="flex gap-4 mt-3">
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Expires</div>
+                    <div className="text-xs">06/28</div>
+                  </div>
+                  <div className="flex-1">
+                    <div className="text-xs text-black/60">Holder</div>
+                    <div className="text-xs">John Doe</div>
+                  </div>
+                </div>
+
+                <div className="mt-3">
+                  <div className="text-xs text-black/60 flex justify-between">
+                    <span>Credit Utilization</span>
+                    <span>0.0%</span>
+                  </div>
+                  <div className="h-2 border border-black rounded-full overflow-hidden mt-1">
+                    <span className="block h-full bg-black w-[0%]" />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-2 gap-4 mt-3 text-sm">
+                  <div>
+                    <div className="text-xs text-black/60">Balance</div>
+                    <div>$0</div>
+                  </div>
+                  <div>
+                    <div className="text-xs text-black/60">Available</div>
+                    <div>$5,000</div>
+                  </div>
+                </div>
+
+                <div className="flex gap-4 mt-4">
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">Make Payment</button>
+                  <button className="border border-black rounded-md px-3 py-2 bg-white">View Statements</button>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div className="flex items-center justify-between py-3">
-              <div className="flex items-center gap-3">
-                <div className="w-4 h-4 bg-red-400 rounded-full"></div>
-                <span className="font-medium text-gray-900">Lifestyle</span>
-              </div>
-              <div className="flex items-center gap-4">
-                <span className="text-lg font-bold text-gray-900">$2</span>
-                <div className="w-6 h-6 text-gray-400">›</div>
-              </div>
+          <div className="h-4" />
+
+          <div className="grid gap-4 lg:grid-cols-4">
+            <div className="border border-black rounded-lg p-4 bg-white">
+              <div className="text-xs text-black/60">Total Cards</div>
+              <div className="font-bold text-xl">3</div>
+            </div>
+            <div className="border border-black rounded-lg p-4 bg-white">
+              <div className="text-xs text-black/60">Total Credit Limit</div>
+              <div className="font-bold text-xl">$20,000</div>
+            </div>
+            <div className="border border-black rounded-lg p-4 bg-white">
+              <div className="text-xs text-black/60">Total Balance</div>
+              <div className="font-bold text-xl">$2,659.3</div>
+            </div>
+            <div className="border border-black rounded-lg p-4 bg-white">
+              <div className="text-xs text-black/60">Available Credit</div>
+              <div className="font-bold text-xl">$17,340.7</div>
             </div>
           </div>
         </div>
       </main>
-
-      {/* Bottom Navigation */}
-      <nav className="bg-white border-t border-gray-200 px-6 py-3">
-        <div className="flex justify-around">
-          <button className="flex flex-col items-center gap-1 text-pink-500">
-            <Eye className="w-6 h-6" />
-            <span className="text-xs font-medium">Overview</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <PieChart className="w-6 h-6" />
-            <span className="text-xs font-medium">Budget</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <Heart className="w-6 h-6" />
-            <span className="text-xs font-medium">Save</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <Briefcase className="w-6 h-6" />
-            <span className="text-xs font-medium">Tools</span>
-          </button>
-        </div>
-      </nav>
-  </div>
+    </div>
   );
 }
 
