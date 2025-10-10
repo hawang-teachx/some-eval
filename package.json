@@ -1,0 +1,21 @@
+{
+    "name": "nextjs-nodejs",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+      "install:all": "npm install && cd app && npm install && cd ../server && npm install",
+      "dev": "concurrently \"npm run dev:app\" \"npm run dev:server\"",
+      "dev:app": "cd app && npm run dev",
+      "dev:server": "cd server && npm run dev",
+      "build": "npm run build:app && npm run build:server",
+      "build:app": "cd app && npm run build",
+      "build:server": "cd server && npm run build",
+      "verify": "npm run build && echo '\n✅ Build successful! Project is properly set up.\n'",
+      "lint": "npm run lint:app && npm run lint:server",
+      "lint:app": "cd app && npm run lint",
+      "lint:server": "cd server && npm run lint"
+    },
+    "devDependencies": {
+      "concurrently": "^9.1.0"
+    }
+  }
