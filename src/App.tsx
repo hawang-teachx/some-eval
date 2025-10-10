@@ -6,7 +6,9 @@ import {
   ArrowRight,
   Briefcase,
   Github,
+  Grid3X3,
   Linkedin,
+  List,
   Mail,
   MapPin,
   Rocket,
@@ -19,6 +21,7 @@ type Project = {
   impact: string
   tags: string[]
   link: string
+  date: string
 }
 
 const projects: Project[] = [
@@ -30,6 +33,7 @@ const projects: Project[] = [
       'Reduced document sync conflicts by 93% for a design organization with 2k+ daily active users.',
     tags: ['Typescript', 'React', 'WebRTC', 'CRDT'],
     link: 'https://example.com/project/realtime-suite',
+    date: '2024-12-01',
   },
   {
     title: 'Developer Insights Dashboard',
@@ -39,6 +43,7 @@ const projects: Project[] = [
       'Accelerated release cadence by 28% by surfacing bottlenecks and DORA metrics in real time.',
     tags: ['Next.js', 'Node.js', 'PostgreSQL', 'Tailwind'],
     link: 'https://example.com/project/dev-insights',
+    date: '2024-11-15',
   },
   {
     title: 'Edge AI Content Moderator',
@@ -48,6 +53,7 @@ const projects: Project[] = [
       'Enabled compliance at scale for a social platform processing 10M+ uploads per day.',
     tags: ['Python', 'ONNX', 'Rust', 'gRPC'],
     link: 'https://example.com/project/edge-ai',
+    date: '2024-11-01',
   },
   {
     title: 'Sustainable Supply Chain Tracker',
@@ -57,6 +63,7 @@ const projects: Project[] = [
       'Identified 15% reduction opportunities by forecasting logistics emissions five weeks ahead.',
     tags: ['React', 'D3.js', 'GraphQL', 'AWS'],
     link: 'https://example.com/project/supply-chain',
+    date: '2024-10-20',
   },
   {
     title: 'Multi-tenant Billing Engine',
@@ -65,6 +72,7 @@ const projects: Project[] = [
     impact: 'Increased revenue capture by 18% for a SaaS platform transitioning to pay-as-you-go pricing.',
     tags: ['Go', 'gRPC', 'Kafka', 'Redis'],
     link: 'https://example.com/project/billing-engine',
+    date: '2024-10-05',
   },
   {
     title: 'Observability Command Center',
@@ -73,6 +81,7 @@ const projects: Project[] = [
     impact: 'Reduced MTTR from 46 minutes to 12 minutes by empowering on-call teams with actionable insights.',
     tags: ['React', 'Typescript', 'OpenTelemetry', 'InfluxDB'],
     link: 'https://example.com/project/observability-center',
+    date: '2024-09-28',
   },
   {
     title: 'Composable Design System',
@@ -81,6 +90,7 @@ const projects: Project[] = [
     impact: 'Cut prototype-to-production time by 42% across three product lines with a unified toolkit.',
     tags: ['Storybook', 'React', 'Figma', 'Accessibility'],
     link: 'https://example.com/project/design-system',
+    date: '2024-09-15',
   },
   {
     title: 'Predictive Incident Assistant',
@@ -89,6 +99,7 @@ const projects: Project[] = [
     impact: 'Flagged 76% of critical incidents before customer impact during beta rollout.',
     tags: ['Python', 'Scikit-learn', 'Airflow', 'SLO'],
     link: 'https://example.com/project/incident-assistant',
+    date: '2024-09-01',
   },
   {
     title: 'AI Pair Programming Coach',
@@ -97,6 +108,7 @@ const projects: Project[] = [
     impact: 'Accelerated code review cycles by 35% while bumping test coverage by 12 points.',
     tags: ['LLM', 'TypeScript', 'VS Code', 'LangChain'],
     link: 'https://example.com/project/ai-coach',
+    date: '2024-08-20',
   },
   {
     title: 'Data Governance Hub',
@@ -105,6 +117,7 @@ const projects: Project[] = [
     impact: 'Enabled 400+ analysts to discover and trust data assets with automated compliance reporting.',
     tags: ['React', 'Hasura', 'GraphQL', 'dbt'],
     link: 'https://example.com/project/governance-hub',
+    date: '2024-08-10',
   },
   {
     title: 'Developer Portal 2.0',
@@ -113,6 +126,7 @@ const projects: Project[] = [
     impact: 'Onboarding time for partner engineers dropped from weeks to three days.',
     tags: ['Next.js', 'MDX', 'OpenAPI', 'Auth0'],
     link: 'https://example.com/project/dev-portal',
+    date: '2024-07-30',
   },
   {
     title: 'Edge Analytics Platform',
@@ -121,6 +135,7 @@ const projects: Project[] = [
     impact: 'Cut latency by 68% for industrial sensors streaming 24/7 telemetry.',
     tags: ['Rust', 'Apache Flink', 'Grafana', 'MQTT'],
     link: 'https://example.com/project/edge-analytics',
+    date: '2024-07-15',
   },
   {
     title: 'Privacy-first Identity Vault',
@@ -129,6 +144,7 @@ const projects: Project[] = [
     impact: 'Met stringent banking compliance requirements while improving sign-in success rate by 22%.',
     tags: ['Kotlin', 'React', 'Cognito', 'KMS'],
     link: 'https://example.com/project/identity-vault',
+    date: '2024-07-01',
   },
   {
     title: 'Collaborative Roadmap Planner',
@@ -137,6 +153,7 @@ const projects: Project[] = [
     impact: 'Improved confidence in quarterly planning by 30% thanks to scenario modeling and dependencies map.',
     tags: ['React', 'Recoil', 'Notion API', 'Tailwind'],
     link: 'https://example.com/project/roadmap-planner',
+    date: '2024-06-20',
   },
   {
     title: 'Customer Feedback Intelligence',
@@ -145,6 +162,7 @@ const projects: Project[] = [
     impact: 'Surfaced emerging product issues 3 weeks earlier, guiding roadmap prioritization.',
     tags: ['Python', 'Transformers', 'BigQuery', 'Looker'],
     link: 'https://example.com/project/feedback-intel',
+    date: '2024-06-10',
   },
   {
     title: 'Composable Commerce Engine',
@@ -153,6 +171,7 @@ const projects: Project[] = [
     impact: 'Powered 9-figure GMV for brands with global storefronts and flash-sale resiliency.',
     tags: ['Node.js', 'GraphQL', 'Redis', 'CloudFront'],
     link: 'https://example.com/project/commerce-engine',
+    date: '2024-05-30',
   },
   {
     title: 'Real-time Workforce Planner',
@@ -161,6 +180,7 @@ const projects: Project[] = [
     impact: 'Helped operations leaders rebalance capacity, cutting overtime costs by 24%.',
     tags: ['Go', 'React', 'Snowflake', 'Metabase'],
     link: 'https://example.com/project/workforce-planner',
+    date: '2024-05-15',
   },
   {
     title: 'SRE Runbook Platform',
@@ -169,6 +189,7 @@ const projects: Project[] = [
     impact: 'Improved on-call confidence scores by 40% while standardizing retrospectives.',
     tags: ['Next.js', 'Typescript', 'MDX', 'PagerDuty'],
     link: 'https://example.com/project/runbook-platform',
+    date: '2024-05-01',
   },
   {
     title: 'AI-powered Resume Screener',
@@ -177,6 +198,7 @@ const projects: Project[] = [
     impact: 'Cut recruiter review time by 55% while improving diversity in interview pipelines.',
     tags: ['Python', 'FastAPI', 'Pinecone', 'React'],
     link: 'https://example.com/project/resume-screener',
+    date: '2024-04-20',
   },
   {
     title: 'Streaming Media Optimizer',
@@ -185,6 +207,7 @@ const projects: Project[] = [
     impact: 'Boosted global playback success to 99.2% during peak events.',
     tags: ['Rust', 'HLS', 'AWS Lambda', 'CloudWatch'],
     link: 'https://example.com/project/media-optimizer',
+    date: '2024-04-10',
   },
   {
     title: 'FinOps Insight Platform',
@@ -193,6 +216,7 @@ const projects: Project[] = [
     impact: 'Saved $1.2M annually by aligning provisioning with usage patterns.',
     tags: ['React', 'Python', 'Athena', 'AWS'],
     link: 'https://example.com/project/finops-platform',
+    date: '2024-03-30',
   },
   {
     title: 'Autonomous Testing Grid',
@@ -201,6 +225,7 @@ const projects: Project[] = [
     impact: 'Cut regression suite time from 90 to 18 minutes while improving pass reliability.',
     tags: ['Cypress', 'Playwright', 'Kubernetes', 'Go'],
     link: 'https://example.com/project/testing-grid',
+    date: '2024-03-15',
   },
   {
     title: 'Immersive Learning Platform',
@@ -209,6 +234,7 @@ const projects: Project[] = [
     impact: 'Achieved 96% completion rates for complex product training.',
     tags: ['Three.js', 'React', 'WebXR', 'Firebase'],
     link: 'https://example.com/project/learning-platform',
+    date: '2024-03-01',
   },
   {
     title: 'Climate Risk Intelligence',
@@ -217,6 +243,7 @@ const projects: Project[] = [
     impact: 'Enabled insurers to adjust portfolios and mitigate $250M in emerging exposure.',
     tags: ['Python', 'GDAL', 'AWS Batch', 'React'],
     link: 'https://example.com/project/climate-risk',
+    date: '2024-02-20',
   },
   {
     title: 'Secure Data Mesh',
@@ -225,6 +252,7 @@ const projects: Project[] = [
     impact: 'Empowered product squads to ship analytics features six weeks faster on average.',
     tags: ['Kubernetes', 'Istio', 'dbt', 'React'],
     link: 'https://example.com/project/data-mesh',
+    date: '2024-02-10',
   },
   {
     title: 'Voice-driven Support Agent',
@@ -233,6 +261,7 @@ const projects: Project[] = [
     impact: 'Deflected 45% of inbound support volume while boosting CSAT by 18 points.',
     tags: ['Node.js', 'Twilio', 'LLM', 'React'],
     link: 'https://example.com/project/support-agent',
+    date: '2024-01-30',
   },
   {
     title: 'Quantum-dev Sandbox',
@@ -241,6 +270,7 @@ const projects: Project[] = [
     impact: 'Accelerated R&D onboarding for a quantum research lab by 3x.',
     tags: ['Python', 'Qiskit', 'React', 'Tailwind'],
     link: 'https://example.com/project/quantum-sandbox',
+    date: '2024-01-15',
   },
 ]
 
@@ -316,9 +346,86 @@ function ProjectCard({ project }: { project: Project }) {
   )
 }
 
+function TimelineProjectCard({ project, position }: { project: Project; position: 'top' | 'bottom' }) {
+  return (
+    <article className={`group relative w-80 overflow-hidden rounded-2xl border border-slate-800/60 bg-slate-900/50 p-4 transition-all hover:border-indigo-500/60 hover:shadow-lg hover:shadow-indigo-500/10 ${position === 'top' ? 'mb-8' : 'mt-8'}`}>
+      <div className="space-y-3">
+        <div className="flex items-center gap-2">
+          <div className="h-2 w-2 rounded-full bg-indigo-400" />
+          <time className="text-xs font-medium text-indigo-300">
+            {new Date(project.date).toLocaleDateString('en-US', {
+              month: 'short',
+              year: 'numeric'
+            })}
+          </time>
+        </div>
+        <h3 className="text-lg font-semibold text-white leading-tight">{project.title}</h3>
+        <p className="text-xs text-slate-300 leading-relaxed line-clamp-2">{project.description}</p>
+        <p className="text-xs text-slate-400 leading-relaxed">{project.impact}</p>
+      </div>
+    </article>
+  )
+}
+
+function Timeline({ projects }: { projects: Project[] }) {
+  // Sort projects by date (earliest to latest)
+  const sortedProjects = [...projects].sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+  return (
+    <div className="relative">
+      {/* Timeline container */}
+      <div className="relative flex items-center h-[500px]">
+        {/* Main timeline arrow */}
+        <div className="relative flex-1">
+          {/* Arrow line */}
+          <div className="h-0.5 bg-gradient-to-r from-indigo-500 via-indigo-400 to-indigo-300 relative">
+            {/* Arrow head */}
+            <div className="absolute -right-2 top-1/2 -translate-y-1/2">
+              <div className="w-0 h-0 border-l-[12px] border-l-indigo-400 border-t-[6px] border-t-transparent border-b-[6px] border-b-transparent" />
+            </div>
+          </div>
+
+          {/* Timeline dots and connection lines */}
+          <div className="absolute inset-0">
+            {sortedProjects.map((project, index) => {
+              const position = index % 2 === 0 ? 'top' : 'bottom'
+              const dotPosition = `${(index / (sortedProjects.length - 1)) * 100}%`
+
+              return (
+                <div key={project.title} className="absolute" style={{ left: dotPosition }}>
+                  {/* Timeline dot */}
+                  <div className="relative">
+                    <div className="w-4 h-4 rounded-full bg-indigo-400 border-2 border-slate-900 absolute left-1/2 -translate-x-1/2 z-10" />
+
+                    {/* Connection line to card */}
+                    <div className={`absolute left-1/2 -translate-x-1/2 w-px bg-slate-700 ${
+                      position === 'top' ? 'top-4 h-8' : 'bottom-4 h-8'
+                    }`} />
+
+                    {/* Project card positioned alternately */}
+                    <div className={`absolute left-1/2 -translate-x-1/2 ${
+                      position === 'top' ? 'top-8' : 'bottom-8'
+                    }`}>
+                      <TimelineProjectCard project={project} position={position} />
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* Optional: Add some padding at the end for better visual balance */}
+      <div className="w-8" />
+    </div>
+  )
+}
+
 function App() {
   const [currentSlide, setCurrentSlide] = useState(0)
   const [itemsPerSlide, setItemsPerSlide] = useState(2)
+  const [projectViewMode, setProjectViewMode] = useState<'cards' | 'timeline'>('cards')
 
   const slides = useMemo(() => {
     const chunkSize = itemsPerSlide
@@ -496,56 +603,92 @@ function App() {
             <p className="max-w-3xl text-base text-slate-300">
               A sampling of platform initiatives, developer tooling, and data-rich experiences that showcase my approach to building thoughtful products end-to-end.
             </p>
+            {/* View toggle */}
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-slate-400">View:</span>
+              <button
+                onClick={() => setProjectViewMode('cards')}
+                className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition ${
+                  projectViewMode === 'cards'
+                    ? 'bg-indigo-500 text-white'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                }`}
+              >
+                <Grid3X3 className="h-4 w-4" />
+                Cards
+              </button>
+              <button
+                onClick={() => setProjectViewMode('timeline')}
+                className={`inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition ${
+                  projectViewMode === 'timeline'
+                    ? 'bg-indigo-500 text-white'
+                    : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                }`}
+              >
+                <List className="h-4 w-4" />
+                Timeline
+              </button>
+            </div>
           </div>
           <div className="relative">
-            <div className="overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 p-6">
-              <div
-                className="flex gap-6 transition-transform duration-500"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {slides.map((slide, index) => (
-                  <div key={`slide-${index}`} className="grid min-w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {slide.map((project) => (
-                      <ProjectCard key={project.title} project={project} />
+            {projectViewMode === 'cards' ? (
+              <>
+                <div className="overflow-hidden rounded-3xl border border-slate-800/60 bg-slate-900/40 p-6">
+                  <div
+                    className="flex gap-6 transition-transform duration-500"
+                    style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                  >
+                    {slides.map((slide, index) => (
+                      <div key={`slide-${index}`} className="grid min-w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                        {slide.map((project) => (
+                          <ProjectCard key={project.title} project={project} />
+                        ))}
+                      </div>
                     ))}
                   </div>
-                ))}
-              </div>
-            </div>
+                </div>
 
-            <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={prevSlide}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/60 bg-slate-900/80 text-slate-300 transition hover:border-indigo-500/60 hover:text-indigo-200"
-                  aria-label="Previous project group"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                </button>
-                <button
-                  onClick={nextSlide}
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/60 bg-slate-900/80 text-slate-300 transition hover:border-indigo-500/60 hover:text-indigo-200"
-                  aria-label="Next project group"
-                >
-                  <ArrowRight className="h-4 w-4" />
-                </button>
-              </div>
+                <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={prevSlide}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/60 bg-slate-900/80 text-slate-300 transition hover:border-indigo-500/60 hover:text-indigo-200"
+                      aria-label="Previous project group"
+                    >
+                      <ArrowLeft className="h-4 w-4" />
+                    </button>
+                    <button
+                      onClick={nextSlide}
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-700/60 bg-slate-900/80 text-slate-300 transition hover:border-indigo-500/60 hover:text-indigo-200"
+                      aria-label="Next project group"
+                    >
+                      <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </div>
 
-              <div className="flex flex-wrap items-center gap-2">
-                {slides.map((_, index) => (
-                  <button
-                    key={`indicator-${index}`}
-                    onClick={() => goToSlide(index)}
-                    className={`h-2 rounded-full transition ${
-                      index === currentSlide
-                        ? 'w-10 bg-indigo-400'
-                        : 'w-4 bg-slate-700 hover:bg-slate-500'
-                    }`}
-                    aria-label={`Go to project group ${index + 1}`}
-                  />
-                ))}
+                  <div className="flex flex-wrap items-center gap-2">
+                    {slides.map((_, index) => (
+                      <button
+                        key={`indicator-${index}`}
+                        onClick={() => goToSlide(index)}
+                        className={`h-2 rounded-full transition ${
+                          index === currentSlide
+                            ? 'w-10 bg-indigo-400'
+                            : 'w-4 bg-slate-700 hover:bg-slate-500'
+                        }`}
+                        aria-label={`Go to project group ${index + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="overflow-x-auto">
+                <div className="min-w-max px-4">
+                  <Timeline projects={projects} />
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
 
