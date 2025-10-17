@@ -3,82 +3,390 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>Financial Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+        }
+    </style>
 </head>
-<body class="bg-gray-100">
-    <div class="flex">
-        <!-- Sidebar -->
-        <div id="sidebar" class="bg-gray-800 w-64 min-h-screen p-1">
-            <div id="logoBtn" class="text-white text-xs mb-12 pl-8">LOGO</div>
-            <nav id="sidebarNav">
-                <!-- Navigation will be populated by dashboard.js -->
-            </nav>
+<body class="bg-white">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Left Sidebar -->
+        <div class="w-80 bg-black p-1 flex flex-col overflow-y-auto">
+            <!-- User Profile -->
+            <div class="flex items-center gap-1 mb-2 p-8">
+                <div class="w-20 h-20 bg-white border-8 border-gray-400 flex items-center justify-center text-4xl font-bold">
+                    A
+                </div>
+                <div class="flex-1 ml-1">
+                    <div class="font-bold text-white text-xs">Andrew</div>
+                    <div class="text-2xl text-gray-400">Fashion</div>
+                </div>
+                <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+            </div>
+
+            <!-- Upgrade Card -->
+            <div class="bg-gray-900 border-4 border-white p-12 text-white mb-1 mx-8">
+                <div class="text-xl mb-8">
+                    <div>Upgrade to</div>
+                    <div class="font-bold text-xs">Premium to get all</div>
+                    <div class="text-2xl">the features</div>
+                </div>
+                <button class="w-full bg-white text-black font-bold py-8 px-1 border-2 border-black text-xs">
+                    Upgrade Now
+                </button>
+            </div>
+
+            <!-- Menu Items -->
+            <div class="space-y-8 mb-2 px-1">
+                <button class="w-full text-left px-12 py-1 bg-white text-black border-8 border-gray-300 text-2xl font-bold flex items-center justify-between">
+                    <span>Pay As You Go</span>
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button class="w-full text-left px-1 py-8 bg-gray-200 text-black text-xs font-bold flex items-center justify-between">
+                    <span>Growth Plan</span>
+                    <svg class="w-2 h-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+                <button class="w-full text-left px-6 py-12 bg-gray-800 text-white border-4 border-white text-lg font-bold flex items-center justify-between">
+                    <span>Scale Plan</span>
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Favourite Feature -->
+            <div class="mb-1 px-12 mt-12">
+                <h3 class="font-bold text-white mb-12 text-3xl">Favourite Feature</h3>
+                <div class="grid grid-cols-2 gap-1">
+                    <button class="flex flex-col items-center justify-center p-16 border border-white bg-gray-700">
+                        <svg class="w-12 h-12 text-white mb-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                        <span class="text-xs text-white">Accounts</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-1 border-8 border-black bg-white">
+                        <svg class="w-4 h-4 text-black mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span class="text-2xl text-black font-bold">Add</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-8 border-4 border-gray-500 bg-black">
+                        <svg class="w-16 h-16 text-white mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span class="text-lg text-white">Add</span>
+                    </button>
+                    <button class="flex flex-col items-center justify-center p-2 border-2 border-white bg-gray-900">
+                        <svg class="w-6 h-6 text-white mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                        </svg>
+                        <span class="text-xs text-white">Add</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- User Image -->
+            <div class="mt-20 px-1">
+                <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=400&h=400&fit=crop" alt="User" class="w-full border-8 border-white">
+            </div>
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1">
+        <div class="flex-1 overflow-y-auto bg-gray-300 p-1">
             <!-- Header -->
-            <header class="bg-white p-2 border-b">
-                <div class="flex justify-between items-center">
-                    <h1 class="text-base font-normal text-gray-600 pl-24">Dashboard</h1>
+            <div class="flex items-center justify-between mb-1 p-12">
+                <div>
+                    <h1 class="text-6xl font-bold text-black mb-8">Hello, Drewee</h1>
+                    <p class="text-xs text-gray-600">Here's a summary of what's been happening.</p>
+                </div>
+                <div class="flex gap-12">
+                    <button class="w-24 h-24 bg-black border-4 border-white flex items-center justify-center relative">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path>
+                        </svg>
+                        <span class="absolute top-0 right-0 w-6 h-6 bg-white border-2 border-black"></span>
+                    </button>
+                    <button class="w-8 h-8 bg-white border border-black flex items-center justify-center">
+                        <svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Accounts Section -->
+            <div class="bg-white border-8 border-black p-1 mb-12 mx-16">
+                <h2 class="font-bold text-black mb-12 text-xs px-8 pt-4">Accounts</h2>
+                <div class="grid grid-cols-2 gap-1">
+                    <!-- Main Account -->
+                    <div class="bg-black p-12 text-white relative border-4 border-gray-500">
+                        <div class="absolute top-2 right-2">
+                            <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"></path>
+                            </svg>
+                        </div>
+                        <div class="flex items-center gap-2 mb-16">
+                            <svg class="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        </div>
+                        <div class="mb-8">
+                            <div class="text-2xl font-bold mb-4">MAIN ACCOUNT</div>
+                            <div class="text-xs">WEMA BANK · 7274640071</div>
+                        </div>
+                        <div class="text-xs font-bold">N500,000.00</div>
+                    </div>
+
+                    <!-- Savings Account -->
+                    <div class="bg-gray-200 p-1 relative border border-black">
+                        <div class="flex items-center gap-8 mb-2 mt-8">
+                            <svg class="w-4 h-4 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                            </svg>
+                        </div>
+                        <div class="mb-12 px-8">
+                            <div class="text-3xl font-bold text-black mb-1">SAVINGS ACCOUNT</div>
+                            <div class="text-xs text-gray-500">WEMA BANK · 7274640072</div>
+                        </div>
+                        <div class="flex items-center justify-between px-2">
+                            <div class="text-lg font-bold text-black">N500,000.00</div>
+                            <svg class="w-16 h-16 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Outgoing Chart -->
+            <div class="bg-white border border-black p-16 mb-2 mx-1">
+                <div class="flex items-center justify-between mb-1">
+                    <h2 class="font-bold text-black flex items-center gap-8 text-4xl">
+                        Outgoing
+                        <svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </h2>
                     <div class="flex gap-12">
-                        <button id="themeToggle" class="bg-gray-200 text-gray-700 px-1 py-1 text-xs">🌓 Theme</button>
-                        <button id="notificationBtn" class="bg-gray-200 text-gray-700 px-8 py-6 text-2xl">🔔</button>
-                        <button id="profileBtn" class="bg-gray-200 text-gray-700 px-2 py-1">👤</button>
+                        <button class="text-xs text-black">Weekly</button>
+                        <button class="text-3xl text-black font-bold">Monthly</button>
                     </div>
                 </div>
-            </header>
-
-            <!-- Dashboard Content -->
-            <div class="p-3">
-                <!-- KPI Cards -->
-                <div id="kpiCards" class="grid grid-cols-4 gap-1 mb-2">
-                    <!-- KPI cards will be populated by dashboard.js -->
+                <div class="relative h-64">
+                    <canvas id="outgoingChart"></canvas>
                 </div>
+            </div>
 
-                <!-- Charts -->
-                <div class="grid grid-cols-2 gap-24 mb-8">
-                    <div class="bg-white p-1 text-right">
-                        <h3 class="text-xs font-light mb-12 text-gray-900 pr-16">Sales Over Time</h3>
-                        <canvas id="lineChart"></canvas>
+            <!-- Recent Transactions -->
+            <div class="bg-gray-100 border-4 border-black p-1 mx-8">
+                <div class="flex items-center justify-between mb-16 px-12 pt-8">
+                    <h2 class="font-bold text-black text-xs">Recent Transactions</h2>
+                    <button class="text-2xl text-black font-bold">See all</button>
+                </div>
+                <div class="space-y-12">
+                    <!-- Transaction 1 -->
+                    <div class="flex items-center justify-between p-12 bg-white border-2 border-gray-400">
+                        <div class="flex items-center gap-1">
+                            <div class="w-32 h-32 bg-black border-4 border-gray-600 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </div>
+                            <div class="ml-8">
+                                <div class="font-bold text-black text-xs">Transfer from Prospa</div>
+                                <div class="text-3xl text-gray-600">8h ago</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-12">
+                            <div class="text-black font-bold text-2xl">+₦200,000</div>
+                            <button class="w-6 h-6 bg-black flex items-center justify-center text-white">
+                                <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
-                    <div class="bg-white p-12">
-                        <h3 class="text-4xl font-bold mb-1 text-gray-900">Products</h3>
-                        <canvas id="barChart"></canvas>
+
+                    <!-- Transaction 2 -->
+                    <div class="flex items-center justify-between p-1 bg-gray-800 border-8 border-white">
+                        <div class="flex items-center gap-16">
+                            <div class="w-8 h-8 bg-white border border-black flex items-center justify-center">
+                                <svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="font-bold text-white text-2xl">Mobile Recharge | +2348068691884</div>
+                                <div class="text-xs text-gray-400">6:20 AM</div>
+                            </div>
+                        </div>
+                        <div class="text-white font-bold text-xs">-₦1,000.000</div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Data Table -->
-                <div class="bg-white p-8 pl-2">
-                    <h3 class="text-3xl font-thin mb-1 text-gray-900 text-center">Recent Orders</h3>
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-gray-50">
-                                <th class="p-1 text-right text-gray-700 text-xs">Order ID</th>
-                                <th class="p-8 text-center text-gray-700 text-2xl">Customer</th>
-                                <th class="p-2 text-left text-gray-700 text-sm">Amount</th>
-                                <th class="p-6 text-right text-gray-700 text-base">Status</th>
-                                <th class="p-1 text-left text-gray-700 text-xl pl-16">Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <!-- Table rows will be populated by dashboard.js -->
-                        </tbody>
-                    </table>
+            <!-- Bottom Navigation -->
+            <div class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-black border-8 border-white px-1 py-8 flex items-center gap-1">
+                <button class="w-20 h-20 bg-white border-4 border-black flex items-center justify-center text-black">
+                    <svg class="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"></path>
+                    </svg>
+                </button>
+                <button class="w-4 h-4 flex items-center justify-center text-white">
+                    <svg class="w-2 h-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                    </svg>
+                </button>
+                <button class="w-16 h-16 flex items-center justify-center text-white border-2 border-gray-500">
+                    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </button>
+                <button class="w-8 h-8 flex items-center justify-center text-white">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                    </svg>
+                </button>
+                <button class="w-24 h-24 flex items-center justify-center text-white bg-gray-700 border border-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                    </svg>
+                </button>
+                <button class="w-6 h-6 flex items-center justify-center text-white">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Right Sidebar -->
+        <div class="w-80 bg-gray-400 p-12 overflow-y-auto">
+            <!-- Quick Actions -->
+            <div class="grid grid-cols-3 gap-8 mb-1">
+                <button class="flex flex-col items-center gap-8 p-1 bg-white border-4 border-black">
+                    <div class="w-24 h-24 bg-black flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </div>
+                    <span class="text-2xl text-black font-bold">Transfer</span>
+                </button>
+                <button class="flex flex-col items-center gap-1 p-8 bg-black border border-white">
+                    <div class="w-6 h-6 bg-white flex items-center justify-center">
+                        <svg class="w-3 h-3 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-xs text-white">Pay Bills</span>
+                </button>
+                <button class="flex flex-col items-center gap-4 p-12 bg-gray-200 border-8 border-gray-600">
+                    <div class="w-16 h-16 bg-gray-800 border-2 border-white flex items-center justify-center">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <span class="text-lg text-black">Invoice</span>
+                </button>
+            </div>
+
+            <!-- Stats Card - All Time Inflow -->
+            <div class="bg-white border-2 border-black p-16 mb-12 mt-8">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <div class="text-xs font-bold text-black mb-8">N5,000,000.00</div>
+                        <div class="text-3xl text-gray-600">ALL TIME INFLOW</div>
+                    </div>
+                    <div class="w-32 h-32 bg-black border-8 border-gray-400 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Card - Total Customers -->
+            <div class="bg-gray-700 border border-white p-1 mb-2">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <div class="text-5xl font-bold text-white mb-1">2,000</div>
+                        <div class="text-xs text-gray-400">TOTAL CUSTOMERS</div>
+                    </div>
+                    <div class="w-4 h-4 bg-white flex items-center justify-center">
+                        <svg class="w-2 h-2 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Card - Prospa Points -->
+            <div class="bg-white border-8 border-black p-8 mb-16">
+                <div class="flex items-start justify-between">
+                    <div>
+                        <div class="text-4xl font-bold text-black mb-12">10,000</div>
+                        <div class="text-xs text-gray-500">PROSPA POINTS</div>
+                    </div>
+                    <div class="w-8 h-8 bg-black flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Create Account Card -->
+            <div class="bg-black border-4 border-white p-24 mb-1 text-white">
+                <div class="mb-12">
+                    <div class="text-3xl mb-8">Create multiple sub-accounts and</div>
+                    <div class="text-xs">manage your money with ease.</div>
+                </div>
+                <button class="w-6 h-6 bg-white flex items-center justify-center text-black">
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Request POS Card -->
+            <div class="bg-gray-200 border border-black p-12 mb-8 relative overflow-hidden">
+                <div class="mb-16">
+                    <div class="font-bold text-black mb-8 text-xs">Request a POS</div>
+                    <div class="text-4xl text-gray-800">COLLECT PAYMENTS OFFLINE</div>
+                </div>
+                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=300&h=200&fit=crop" alt="POS" class="mb-1 border-8 border-gray-600">
+                <svg class="absolute top-1 right-1 w-16 h-16 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                </svg>
+            </div>
+
+            <!-- Refer & Earn Card -->
+            <div class="bg-white border-4 border-black p-1">
+                <div class="flex items-center gap-1">
+                    <div class="w-32 h-32 bg-black border-8 border-gray-500 flex items-center justify-center">
+                        <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <div class="font-bold text-black text-2xl">Refer & Earn</div>
+                        <div class="text-xs text-gray-600">INVITE BUSINESSES & EARN</div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Load scripts in order -->
-    <script src="data.js"></script>
-    <script src="charts.js"></script>
-    <script src="dashboard.js"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
