@@ -121,12 +121,10 @@ interface Budget {
 }
 
 interface AppState {
-  isLoading: boolean;
   transactions: Transaction[];
   categories: Category[];
   accounts: Account[];
   budgets: Budget[];
-  lastSaved: number | null;
   addTransaction: (
     transaction: Omit<Transaction, "id" | "createdAt" | "updatedAt">
   ) => void;
@@ -135,8 +133,7 @@ interface AppState {
   addBudget: (budget: Omit<Budget, "id">) => void;
   updateBudget: (id: string, budget: Partial<Budget>) => void;
   deleteBudget: (id: string) => void;
-  loadData: () => Promise<void>;
-  setLoading: (loading: boolean) => void;
+  initializeData: () => void;
 }
 
 // ============================================================================
@@ -1076,24 +1073,18 @@ const DEFAULT_ACCOUNTS: Account[] = [
 // UTILITY FUNCTIONS
 // ============================================================================
 
-// Simulate API calls with delays
-function asyncSaveToStorage(key: string, data: any): Promise<void> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      localStorage.setItem(key, JSON.stringify(data));
-      resolve();
-    }, Math.random() * 100 + 50);
-  });
+function saveToStorage(key: string, data: any): void {
+  if (typeof window !== "undefined") {
+    localStorage.setItem(key, JSON.stringify(data));
+  }
 }
 
-// Simulate API calls with delays
-function asyncLoadFromStorage(key: string): Promise<any> {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      const stored = localStorage.getItem(key);
-      resolve(stored ? JSON.parse(stored) : null);
-    }, Math.random() * 200 + 100);
-  });
+function loadFromStorage(key: string): any {
+  if (typeof window !== "undefined") {
+    const stored = localStorage.getItem(key);
+    return stored ? JSON.parse(stored) : null;
+  }
+  return null;
 }
 
 function generateId(): string {
@@ -1168,25 +1159,6 @@ const useStore = create<AppState>((set, get) => ({
   categories: PREDEFINED_CATEGORIES,
   accounts: DEFAULT_ACCOUNTS,
   budgets: [],
-  isLoading: false,
-  lastSaved: Date.now(),
-
-  setLoading: (loading) => set({ isLoading: loading }),
-
-  loadData: async () => {
-    set({ isLoading: true });
-    const [transactions, budgets] = await Promise.all([
-      asyncLoadFromStorage(STORAGE_KEYS.TRANSACTIONS),
-      asyncLoadFromStorage(STORAGE_KEYS.BUDGETS),
-    ]);
-
-    set({
-      transactions: transactions || [],
-      budgets: budgets || [],
-      isLoading: false,
-      lastSaved: Date.now(),
-    });
-  },
 
   addTransaction: (transaction) => {
     const newTransaction: Transaction = {
@@ -1195,11 +1167,10 @@ const useStore = create<AppState>((set, get) => ({
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
     };
-
     set((state) => {
       const newTransactions = [...state.transactions, newTransaction];
-      asyncSaveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
-      return { transactions: newTransactions, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
+      return { transactions: newTransactions };
     });
   },
 
@@ -1210,25 +1181,28 @@ const useStore = create<AppState>((set, get) => ({
           ? { ...t, ...updates, updatedAt: new Date().toISOString() }
           : t
       );
-      asyncSaveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
-      return { transactions: newTransactions, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
+      return { transactions: newTransactions };
     });
   },
 
   deleteTransaction: (id) => {
     set((state) => {
       const newTransactions = state.transactions.filter((t) => t.id !== id);
-      asyncSaveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
-      return { transactions: newTransactions, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.TRANSACTIONS, newTransactions);
+      return { transactions: newTransactions };
     });
   },
 
   addBudget: (budget) => {
-    const newBudget: Budget = { ...budget, id: generateId() };
+    const newBudget: Budget = {
+      ...budget,
+      id: generateId(),
+    };
     set((state) => {
       const newBudgets = [...state.budgets, newBudget];
-      asyncSaveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
-      return { budgets: newBudgets, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
+      return { budgets: newBudgets };
     });
   },
 
@@ -1237,16 +1211,26 @@ const useStore = create<AppState>((set, get) => ({
       const newBudgets = state.budgets.map((b) =>
         b.id === id ? { ...b, ...updates } : b
       );
-      asyncSaveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
-      return { budgets: newBudgets, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
+      return { budgets: newBudgets };
     });
   },
 
   deleteBudget: (id) => {
     set((state) => {
       const newBudgets = state.budgets.filter((b) => b.id !== id);
-      asyncSaveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
-      return { budgets: newBudgets, lastSaved: Date.now() };
+      saveToStorage(STORAGE_KEYS.BUDGETS, newBudgets);
+      return { budgets: newBudgets };
+    });
+  },
+
+  initializeData: () => {
+    const storedTransactions = loadFromStorage(STORAGE_KEYS.TRANSACTIONS);
+    const storedBudgets = loadFromStorage(STORAGE_KEYS.BUDGETS);
+
+    set({
+      transactions: storedTransactions || [],
+      budgets: storedBudgets || [],
     });
   },
 }));
@@ -1953,54 +1937,30 @@ export default function Dashboard() {
   const transactions = useStore((state) => state.transactions);
   const categories = useStore((state) => state.categories);
   const budgets = useStore((state) => state.budgets);
-  const isLoading = useStore((state) => state.isLoading);
-  const loadData = useStore((state) => state.loadData);
-  const lastSaved = useStore((state) => state.lastSaved);
+  const initializeData = useStore((state) => state.initializeData);
 
   const [showTransactionModal, setShowTransactionModal] = useState(false);
   const [editingTransaction, setEditingTransaction] = useState<
     Transaction | undefined
   >();
-  const [autoSaveStatus, setAutoSaveStatus] = useState("Saved");
 
-  console.log(showTransactionModal);
-
-  // Initialize app data on first render
   useEffect(() => {
-    loadData();
-  }, []);
+    initializeData();
+  }, [initializeData]);
 
-  // Auto-save transactions every 3 seconds to prevent data loss
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAutoSaveStatus("Saving...");
-      asyncSaveToStorage(STORAGE_KEYS.TRANSACTIONS, transactions).then(() => {
-        setAutoSaveStatus("Saved");
-      });
-    }, 3000);
-    return () => clearInterval(interval);
-  }, [transactions]);
-
-  // Recalculate account balances whenever transactions change
-  useEffect(() => {
-    const updateBalances = () => {
-      const balances = DEFAULT_ACCOUNTS.map((account) => ({
-        ...account,
-        balance: calculateAccountBalance(transactions, account.type),
-      }));
-      // Balances are now up to date
+    const handleOpenAddTransaction = () => {
+      setEditingTransaction(undefined);
+      setShowTransactionModal(true);
     };
-    updateBalances();
-  }, [transactions]);
 
-  // Sync with storage after save operations to ensure data consistency
-  useEffect(() => {
-    if (lastSaved && !isLoading) {
-      setTimeout(() => {
-        loadData();
-      }, 500);
-    }
-  }, [lastSaved]);
+    window.addEventListener("openAddTransaction", handleOpenAddTransaction);
+    return () =>
+      window.removeEventListener(
+        "openAddTransaction",
+        handleOpenAddTransaction
+      );
+  }, []);
 
   // Calculate current month data
   const currentMonthStart = startOfMonth(new Date());
