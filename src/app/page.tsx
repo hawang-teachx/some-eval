@@ -121,10 +121,12 @@ interface Budget {
 }
 
 interface AppState {
+  isLoading: boolean;
   transactions: Transaction[];
   categories: Category[];
   accounts: Account[];
   budgets: Budget[];
+  lastSaved: number | null;
   addTransaction: (
     transaction: Omit<Transaction, "id" | "createdAt" | "updatedAt">
   ) => void;
